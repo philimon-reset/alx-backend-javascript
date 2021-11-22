@@ -1,3 +1,5 @@
-import appendToEachArrayValue from './10-loops.js';
+import getSumOfHoods from './3-default-parameter.js';
 
-console.log(appendToEachArrayValue(['appended', 'fixed', 'displayed'], 'correctly-'));
+console.log(getSumOfHoods(34));
+console.log(getSumOfHoods(34, 3));
+console.log(getSumOfHoods(34, 3, 4));
