@@ -16,7 +16,7 @@ const app = http.createServer((req, res) => {
   } else if (url === '/students') {
     res.write('This is the list of our students\n');
     if (fs.existsSync(argv[2])) {
-      return new Promise((resolve) => {
+      return new Promise(() => {
         fs.readFile(argv[2], 'utf8', (err, data) => {
           if (err) {
             throw Error('Cannot load the database');
