@@ -2,9 +2,21 @@ const http = require('http');
 const fs = require('fs');
 const { argv } = require('process');
 
-function countStudents(path, stream) {
-  if (fs.existsSync(path)) {
-    fs.readFile(path, 'utf8', (err, data) => {
+const hostname = 'localhost';
+const port = 1245;
+
+// eslint-disable-next-line consistent-return
+const app = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  const { url } = req;
+  if (url === '/') {
+    res.write('Hello Holberton School!');
+    res.end();
+  }
+  if (url === '/students') {
+    res.write('This is the list of our students\n');
+    fs.readFileSync(argv[2], 'utf8', (err, data) => {
       if (err) {
         throw Error('Cannot load the database');
       }
@@ -20,32 +32,10 @@ function countStudents(path, stream) {
       const final = {};
       fields.forEach((data) => { (final[data] = 0); });
       newis.forEach((data) => { (final[data[1]] += 1); });
-      stream.write(`Number of students: ${result.length}`);
-      Object.keys(final).forEach((data) => stream.write(`Number of students in ${data}: ${final[data]}. List: ${newis.filter((n) => n[1] === data).map((n) => n[0]).join(', ')}`));
-    });
-  } else { throw new Error('Cannot load the database'); }
-}
-
-const hostname = 'localhost';
-const port = 1245;
-
-// eslint-disable-next-line consistent-return
-const app = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  const { url } = req;
-  if (url === '/') {
-    res.write('Hello Holberton School!');
-    res.end();
-  }
-  if (url === '/students') {
-    res.write('This is the list of our students\n');
-    try {
-      countStudents(argv[2], res);
+      res.write(`Number of students: ${result.filter((check) => check.length > 3).length}\n`);
+      Object.keys(final).forEach((data) => res.write(`Number of students in ${data}: ${final[data]}. List: ${newis.filter((n) => n[1] === data).map((n) => n[0]).join(', ')}\n`));
       res.end();
-    } catch (err) {
-      res.end(err.message);
-    }
+    });
   }
 });
 
