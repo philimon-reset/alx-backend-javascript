@@ -11,7 +11,7 @@ const app = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'text/plain');
   const { url } = req;
   if (url === '/') {
-    res.write('Hello Holberton School!\n');
+    res.write('Hello Holberton School!');
     res.end();
   } else if (url === '/students') {
     res.write('This is the list of our students\n');
@@ -34,7 +34,7 @@ const app = http.createServer((req, res) => {
           fields.forEach((data) => { (final[data] = 0); });
           newis.forEach((data) => { (final[data[1]] += 1); });
           res.write(`Number of students: ${result.filter((check) => check.length > 3).length}\n`);
-          Object.keys(final).forEach((data) => res.write(`Number of students in ${data}: ${final[data]}. List: ${newis.filter((n) => n[1] === data).map((n) => n[0]).join(', ')}\n`));
+          Object.keys(final).forEach((data) => res.write(`Number of students in ${data}: ${final[data]}. List: ${newis.filter((n) => n[1] === data).map((n) => n[0]).join(', ')}`));
           res.end();
           resolve();
         });
