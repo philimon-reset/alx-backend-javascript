@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 
 app.get('/students', (req, res) => {
   res.set('Content-Type', 'text/plain');
-  res.write('This is the list of our students\n');
+  res.send('This is the list of our students\n');
   fs.readFile(argv[2], 'utf8', (err, data) => {
     if (err) {
       throw Error('Cannot load the database');
@@ -28,8 +28,8 @@ app.get('/students', (req, res) => {
     const final = {};
     fields.forEach((data) => { (final[data] = 0); });
     newis.forEach((data) => { (final[data[1]] += 1); });
-    res.write(`Number of students: ${result.filter((check) => check.length > 3).length}\n`);
-    Object.keys(final).forEach((data) => res.write(`Number of students in ${data}: ${final[data]}. List: ${newis.filter((n) => n[1] === data).map((n) => n[0]).join(', ')}\n`));
+    res.send(`Number of students: ${result.filter((check) => check.length > 3).length}\n`);
+    Object.keys(final).forEach((data) => res.send(`Number of students in ${data}: ${final[data]}. List: ${newis.filter((n) => n[1] === data).map((n) => n[0]).join(', ')}\n`));
   });
 });
 
