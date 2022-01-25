@@ -13,7 +13,8 @@ const app = http.createServer((req, res) => {
   if (url === '/') {
     res.write('Hello Holberton School!');
     res.end();
-  } else if (url === '/students') {
+  }
+  if (url === '/students') {
     res.write('This is the list of our students\n');
     fs.readFile(argv[2], 'utf8', (err, data) => {
       if (err) {
