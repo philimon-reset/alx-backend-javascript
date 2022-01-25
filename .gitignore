@@ -1,6 +1,14 @@
+test.py
+__pycache__/
+git*
+pull
+babel.config.js
 node_modules
-*/node_modules
+.eslintrc.js
+package.json
+package-lock.json
 *.
+.*
 .vscode
 *~
 */__pycache__
