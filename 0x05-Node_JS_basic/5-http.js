@@ -18,7 +18,15 @@ function countStudents(path, stream) {
     fields.forEach((data) => { (final[data] = 0); });
     newis.forEach((data) => { (final[data[1]] += 1); });
     stream.write(`Number of students: ${result.length}\n`);
-    Object.keys(final).forEach((data) => stream.write(`Number of students in ${data}: ${final[data]}. List: ${newis.filter((n) => n[1] === data).map((n) => n[0]).join(', ')}\n`));
+    const temp = [];
+    Object.keys(final).forEach((data) => temp.push(`Number of students in ${data}: ${final[data]}. List: ${newis.filter((n) => n[1] === data).map((n) => n[0]).join(', ')}\n`));
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < temp.length; i++) {
+      if (i === temp.length - 1) {
+        temp[i] = temp[i].replace(/(\r\n|\n|\r)/gm, '');
+      }
+      stream.write(temp[i]);
+    }
   } else { throw new Error('Cannot load the database'); }
 }
 
