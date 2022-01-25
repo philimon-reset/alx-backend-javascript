@@ -11,4 +11,5 @@ package-lock.json
 .*
 .vscode
 *~
+a.out
 */__pycache__
