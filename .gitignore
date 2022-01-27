@@ -5,7 +5,6 @@ pull
 babel.config.js
 node_modules
 .eslintrc.js
-package.json
 package-lock.json
 *.
 .*
