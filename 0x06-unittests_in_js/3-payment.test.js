@@ -10,6 +10,7 @@ describe('', () => {
     const checkSoy = sinon.spy(Utils, 'calculateNumber');
     sendPaymentRequestToApi(1, 3);
     expect(checkSoy.calledOnce).to.be.true;
+    expect(checkSoy.calledWith(1, 3)).to.be.true;
     checkSoy.restore();
   });
 });
